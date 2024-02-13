@@ -1,0 +1,92 @@
+.layout-sidebar {
+    position: fixed;
+    width: 300px;
+    height: calc(100vh - 9rem);
+    z-index: 999;
+    overflow-y: auto;
+    top: 7rem;
+    left: 2rem;
+    transition: transform $transition-duration, left $transition-duration;
+    background-color: var(--surface-overlay);
+    border-radius: $border-radius;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, .02), 0px 0px 2px rgba(0, 0, 0, .05), 0px 1px 4px rgba(0, 0, 0, .08);
+    box-sizing: border-box;
+}
+
+.layout-menu {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    .layout-root-menuitem > a {
+        display: none;
+    }
+
+    .layout-root-menuitem > .layout-menuitem-root-text {
+        font-size: .857rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--surface-900);
+        margin: .75rem 0;
+    }
+
+    a {
+        &.active-menuitem >.layout-submenu-toggler {
+            transform: rotate(-180deg);
+        }
+    }
+
+    li.active-menuitem > a {
+        .layout-submenu-toggler {
+            transform: rotate(-180deg);
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    ul a {
+        display: flex;
+        align-items: center;
+        position: relative;
+        outline: 0 none;
+        color: var(--text-color);
+        cursor: pointer;
+        padding: 1.55rem 1rem;
+        border-radius: $border-radius;
+        transition: background-color $transition-duration, box-shadow $transition-duration;
+    }
+
+    ul a .layout-menuitem-icon {
+        margin-right: .5rem;
+    }
+
+    ul a .layout-submenu-toggler {
+        font-size: 75%;
+        margin-left: auto;
+        transition: transform $transition-duration;
+    }
+
+    ul a.rotated-icon {
+        .layout-menuitem-icon {
+            transform: rotate(90deg);
+        }
+    }
+
+    ul a.active-route {
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    ul a:hover {
+        background-color: var(--surface-hover);
+    }
+
+    ul a:focus {
+        @include focused-inset();
+    }
+}

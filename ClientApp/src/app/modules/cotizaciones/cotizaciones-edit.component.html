@@ -1,0 +1,64 @@
+<div class="card mb-5">
+    <h5>Cotización</h5>
+    <form novalidate [formGroup]="cotizacionesControls">
+        <div class="p-fluid p-formgrid grid">
+            <div class="field col-12 md:col-3">
+                <label htmlFor="idTipoRamo">Tipo de ramo</label>
+                <p-dropdown id="idTipoRamo" [autoDisplayFirst]="false" [options]="tipoRamos" optionValue="value"
+                    formControlName="idTipoRamo" filterBy="label" [disabled]="operation == 'VIEW'"
+                    placeholder="Seleccione una opción" emptyFilterMessage="No se han encontrado resultados"
+                    [resetFilterOnHide]="true" appendTo="body">
+                </p-dropdown>
+                <error-message-app [displayError]="toolsService.isFieldValid(cotizacionesControls, 'idTipoRamo')!"
+                    [message]="errorMsj[prefixValidator+'idTipoRamo']"></error-message-app>
+            </div>
+
+            <div class="field col-12 md:col-3">
+                <label htmlFor="numeroCotizacion">Número de cotización</label>
+                <input pInputText id="numeroCotizacion" type="text" formControlName="numeroCotizacion"
+                    [attr.disabled]="operation == 'VIEW' ? true : null" />
+                <error-message-app [displayError]="toolsService.isFieldValid(cotizacionesControls, 'numeroCotizacion')!"
+                    [message]="errorMsj[prefixValidator+'numeroCotizacion']"></error-message-app>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label htmlFor="sumaAsegurada">Suma asegurada</label>
+                <input pInputText id="sumaAsegurada" type="text" formControlName="sumaAsegurada"
+                    [attr.disabled]="operation == 'VIEW' ? true : null" />
+                <error-message-app [displayError]="toolsService.isFieldValid(cotizacionesControls, 'sumaAsegurada')!"
+                    [message]="errorMsj[prefixValidator+'sumaAsegurada']"></error-message-app>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label htmlFor="fechaCotizacion">Fecha de cotización</label>
+                <p-calendar id="fechaCotizacion" formControlName="fechaCotizacion" [disabled]="operation == 'VIEW'"
+                    dateFormat="dd-mm-yy" [showIcon]="true" appendTo="body">
+                </p-calendar>
+                <error-message-app [displayError]="toolsService.isFieldValid(cotizacionesControls, 'fechaCotizacion')!"
+                    [message]="errorMsj[prefixValidator+'fechaCotizacion']"></error-message-app>
+            </div>
+            <div class="field col-12 md:col-3">
+                <label htmlFor="valorCotizacion"><strong>Valor de la cotización</strong></label>
+                <input pInputText id="valorCotizacion" type="text" formControlName="valorCotizacion"
+                    [attr.disabled]="true" readonly />
+                <error-message-app [displayError]="toolsService.isFieldValid(cotizacionesControls, 'valorCotizacion')!"
+                    [message]="errorMsj[prefixValidator+'valorCotizacion']"></error-message-app>
+            </div>
+
+        </div>
+        <div class="flex flex-column-reverse sm:flex-row justify-content-between flex-wrap">
+            <div class="flex justify-content-start flex-wrap">
+                <button pButton pRipple type="button" label="Volver" class="flex-1 p-button-secondary my-3"
+                    icon="pi pi-angle-left" routerLink="/modules/cotizaciones"></button>
+            </div>
+            <div class="flex flex-column sm:flex-row justify-content-between flex-wrap">
+                <button pButton pRipple type="button" label="Borrar" class="p-button-danger my-3 sm:mr-3"
+                    icon='pi pi-trash' [disabled]="operation == 'VIEW'"
+                    (click)="delete(cotizacion.seqCertificacion)"></button>
+                <button pButton pRipple type="button" label="Cotizar" class="p-button-info my-3 sm:mr-3"
+                    icon='pi pi-money-bill' (click)="cotizar()"></button>
+                <button *ngIf="operation !== 'VIEW'" pButton pRipple type=" button" label="Guardar"
+                    class="p-button-success my-3" [icon]="processing.save ? 'pi pi-spin pi-spinner' : 'pi pi-check'"
+                    [disabled]="operation == 'VIEW'" (click)="save()"></button>
+            </div>
+        </div>
+    </form>
+</div>

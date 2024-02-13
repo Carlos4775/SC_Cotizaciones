@@ -1,0 +1,17 @@
+<div class="layout-wrapper" [ngClass]="containerClass">
+  <app-topbar></app-topbar>
+  <div class="layout-sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="layout-main-container">
+    <div class="layout-main">
+      <router-outlet *ngIf="!spinner"></router-outlet>
+
+      <div *ngIf="spinner" class="flex align-items-center justify-content-center" style="min-height: 80vh">
+        <p-progressSpinner></p-progressSpinner>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+  <div class="layout-mask"></div>
+</div>

@@ -1,0 +1,57 @@
+<div class="card mb-5">
+    <h5>Cotizaciones</h5>
+    <p-table [value]="cotizaciones" responsiveLayout="scroll" styleClass="p-datatable-striped"
+        [loading]="processing.table">
+        <ng-template pTemplate="caption">
+            <div class="flex flex-column-reverse sm:justify-content-between sm:flex-row align-items-center">
+                <div class="p-button-outlined my-3">
+                    <button pButton pRipple label="Agregar cotización" icon="pi pi-plus" class="p-button-success"
+                        routerLink="/modules/cotizaciones/create"></button>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tipo de ramo</th>
+                <th scope="col">Número de cotización</th>
+                <th scope="col">Suma asegurada</th>
+                <th scope="col">Fecha de cotización</th>
+                <th scope="col">Valor de la cotización</th>
+                <th scope="col" class="text-center">Acciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cotizacion let-rowIndex="rowIndex">
+            <tr>
+                <td class="fw-bold">{{ rowIndex + 1 + (pagination.pageSize * (pagination.currentPage - 1)) }}</td>
+                <td>{{ cotizacion.idTipoRamo }}</td>
+                <td>{{ cotizacion.numeroCotizacion }}</td>
+                <td>{{ cotizacion.sumaAsegurada }}</td>
+                <td>{{ cotizacion.fechaCotizacion | date: "dd/MM/yyyy" }}</td>
+                <td>{{ cotizacion.valorCotizacion}}</td>
+                <td>
+                    <div class="flex flex-column md:flex-row justify-content-center">
+                        <button pButton pRipple type="button" icon="pi pi-search"
+                            class="p-button p-component p-button-text p-button-icon-only"
+                            routerLink="{{ cotizacion.seqCertificacion }}/view" pTooltip="Ver" tooltipPosition="top">
+                        </button>
+                        <button pButton pRipple type="button" icon="pi pi-pencil"
+                            class="p-button p-component p-button-text p-button-icon-only"
+                            routerLink="{{ cotizacion.seqCertificacion }}/edit" pTooltip="Editar" tooltipPosition="top">
+                        </button>
+                        <button pButton pRipple type="button" icon="pi pi-trash"
+                            class="p-button p-component p-button-text p-button-icon-only"
+                            (click)="delete(cotizacion.seqCertificacion)" pTooltip="Eliminar" tooltipPosition="top">
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8">No existen datos registrados.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
